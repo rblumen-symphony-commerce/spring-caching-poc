@@ -1,0 +1,33 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+                           http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+                           ">
+
+  <cache:annotation-driven />
+  <context:property-placeholder location="classpath:redis.properties"/> 
+  
+  <bean id="hello" class="com.cache.HelloWorld" p:name="hello"/>
+  <bean id="hey" class="com.cache.HelloWorld" p:name="wotup"/>
+  
+  <bean id="jedisConnectionFactory"
+        class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+        p:host-name="${redis.host}"
+        p:port="${redis.port}"
+        p:use-pool="true"/>
+  
+  <bean id="redisTemplate"
+        class="org.springframework.data.redis.core.RedisTemplate"
+        p:connection-factory-ref="jedisConnectionFactory"/>
+  
+  <bean id="cacheManager"
+        class="org.springframework.data.redis.cache.RedisCacheManager"
+        c:template-ref="redisTemplate"/>
+
+</beans>
