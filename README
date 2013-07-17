@@ -1,0 +1,3 @@
+Sample code showing how the Spring cache abstraction works together with redis.
+For the code to run requires that redis-server be installed and running.
+See src/main/resources/redis.properties for the configuration.
