@@ -18,7 +18,6 @@ public class App
         App app = new App();
         app.ruly(hw1);
         app.longDist(hw2);
-       //ruly(hw);
     }
 
     void ruly(HelloWorld hw) {
@@ -46,7 +45,7 @@ public class App
         String v2= hw.getLongDistance();
         System.out.println("second v of ld y2=" + v2); 
 
-        //hw.hello();
+        hw.hello();
 
         String v3= hw.getLongDistance();
         System.out.println("third v of ld y3=" + v3); 
