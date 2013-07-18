@@ -10,11 +10,13 @@
                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
                            ">
 
-  <cache:annotation-driven />
+  <cache:annotation-driven cache-manager="cacheManager" key-generator="keyGenerator" />
+  
   <context:property-placeholder location="classpath:redis.properties"/> 
   
   <bean id="hello" class="com.cache.HelloWorld" p:name="hello"/>
   <bean id="hey" class="com.cache.HelloWorld" p:name="wotup"/>
+  <bean id="keyGenerator" class="com.cache.CacheKeyGenerator" />
   
   <bean id="jedisConnectionFactory"
         class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
@@ -28,6 +30,7 @@
   
   <bean id="cacheManager"
         class="org.springframework.data.redis.cache.RedisCacheManager"
+        p:defaultExpiration="300"
         c:template-ref="redisTemplate"/>
 
 </beans>

@@ -14,14 +14,16 @@ public class HelloWorld {
         this.name = name;
     }
         
-    @Cacheable(value="stuff", key="#root.target.hashCode()")
-    public String getRulyComplicated() {
+    //@Cacheable(value="stuff", key="#root.target.hashCode()")
+    @Cacheable("stuff")
+    public String getRulyComplicated(boolean flag, @IgnoreCacheKey int ignore) {
         String value = new Double(Math.random() * 1000.0).toString(); 
         logr("calculating ruly complicated thang=" + value);
         return value ;
     }
         
-    @Cacheable(value="other-stuff", key="#root.target.hashCode()")
+    //@Cacheable(value="other-stuff", key="#root.target.hashCode()")
+    @Cacheable("other-stuff")
     public String getLongDistance() {
         String value = new Double(Math.random() * 1000.0).toString(); 
         logr("calculating long distance=" + value);
